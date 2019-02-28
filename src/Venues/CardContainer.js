@@ -1,37 +1,70 @@
 import React, { Component } from "react";
 import VenueCard from "./VenueCard";
+import Pagination from "./Pagination";
 
 export default class CardContainer extends Component {
- state = {
-   venues:[]
- };
+  state = {
+    venues: [],
+    start: 0,
+    end: 10,
+    active: 1,
+    pages: 0
+  };
 
   getVenues() {
-    fetch('https://venue-lister.herokuapp.com/venues', {
+    fetch("https://venue-lister.herokuapp.com/venues", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-    }}).then(resp => resp.json())
-    .then(resp=> this.setState({
-      venues: resp}))
+      headers: {"Content-Type": "application/json"}
+    })
+      .then(resp => resp.json())
+      .then(resp =>
+        this.setState({
+          venues: resp,
+          pages: resp.length / 10 + 1
+        })
+      );
   }
 
   populateCards(venue) {
-    return (
-      <VenueCard 
-        name={venue.name}
-        city={venue.city}
-        />
-    )
+    return <VenueCard name={venue.name} city={venue.city} />;
   }
 
+  nextPage = () => {
+    if (this.state.active < this.state.pages - 1){
+    this.setState({
+      active: this.state.active + 1,
+      start: this.state.start + 10,
+      end: this.state.end + 10
+    })}
+  };
+
+  prevPage = () => {
+    if (this.state.active > 1) {
+    this.setState({
+      active: this.state.active - 1,
+      start: this.state.start - 10,
+      end: this.state.end - 10
+    })
+    }
+  };
+
   componentDidMount() {
-    this.getVenues()
+    this.getVenues();
   }
 
   render() {
-    return (<div>
-      {this.state.venues.map(venue=> this.populateCards(venue))}
-      </div>);
+    return (
+      <div>
+        <Pagination
+          active={this.state.active}
+          pages={this.state.pages}
+          nextPage={this.nextPage}
+          prevPage={this.prevPage}
+        />
+        {this.state.venues
+          .slice(this.state.start, this.state.end)
+          .map(venue => this.populateCards(venue))}
+      </div>
+    );
   }
 }
