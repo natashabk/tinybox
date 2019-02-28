@@ -5,14 +5,15 @@ import Button from "react-bootstrap/Button";
 export default class Home extends Component {
   render() {
     return (
-      <div>
+      <div className="homeContainer">
       <Form>
-        <Form.Group controlId="locationSearch">
-          <Form.Label>Event location</Form.Label>
-          <Form.Control type="text" placeholder="ex. Dublin, Ireland..." />
+        <Form.Group>
+          <div id="locationSearch">
+          <Form.Control type="text" placeholder="Event location..." />
           <Button variant="primary" type="submit">
             Go!
           </Button>
+          </div>
         </Form.Group>
       </Form>
       <Button href="/venues" variant="primary" type="submit">

@@ -7,7 +7,8 @@ export default class CardContainer extends Component {
     venues: [],
     start: 0,
     active: 1,
-    pages: 0
+    pages: 0,
+    loading: true
   };
 
   getVenues() {
@@ -19,7 +20,8 @@ export default class CardContainer extends Component {
       .then(resp =>
         this.setState({
           venues: resp,
-          pages: resp.length / 10 + 1
+          pages: resp.length / 10 + 1,
+          loading: false
         })
       );
   }
@@ -52,6 +54,19 @@ export default class CardContainer extends Component {
     })
   }
 
+  loading() {
+    return this.state.loading ? 
+      <div className="loader" /> 
+      : 
+      <Pagination
+      active={this.state.active}
+      pages={this.state.pages}
+      nextPage={this.nextPage}
+      prevPage={this.prevPage}
+      jumpPage={this.jumpPage}
+    />
+  }
+
   componentDidMount() {
     this.getVenues();
   }
@@ -59,18 +74,12 @@ export default class CardContainer extends Component {
   render() {
     return (
       <div className="container">
-        <Pagination
-          active={this.state.active}
-          pages={this.state.pages}
-          nextPage={this.nextPage}
-          prevPage={this.prevPage}
-          jumpPage={this.jumpPage}
-        />
         <div className="card-deck text-center">
         {this.state.venues
           .slice(this.state.start, this.state.start+10)
           .map(venue => this.populateCards(venue))}
         </div>
+        {this.loading()}
       </div>
     );
   }
