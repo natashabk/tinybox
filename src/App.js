@@ -3,6 +3,7 @@ import logo from './Images/Logo.png';
 import './Styling/App.css';
 import Home from './Home';
 import NavBar from './NavBar';
+import CardContainer from './Venues/CardContainer'
 
 class App extends Component {
   render() {
@@ -10,6 +11,8 @@ class App extends Component {
       <div className="App">
        <NavBar />
        <Home/>
+       <hr></hr>
+      <CardContainer />
       </div>
     );
   }
