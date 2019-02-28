@@ -15,7 +15,7 @@ export default class Home extends Component {
           </Button>
         </Form.Group>
       </Form>
-      <Button variant="primary" type="submit">
+      <Button href="/venues" variant="primary" type="submit">
       Browse All Listings
     </Button>
     </div>
