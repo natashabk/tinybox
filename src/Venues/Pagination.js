@@ -5,9 +5,12 @@ export default class CardContainer extends Component {
   displayPageNumbers() {
     const items = [];
     for (let i = 1; i < this.props.pages; i++) {
-      console.log(i);
       items.push(
-        <Pagination.Item key={i} active={i === this.props.active}>
+        <Pagination.Item 
+          key={i} 
+          active={i === this.props.active}
+          onClick={() => this.props.jumpPage(i)}  
+        >
           {i}
         </Pagination.Item>
       );

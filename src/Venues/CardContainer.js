@@ -6,7 +6,6 @@ export default class CardContainer extends Component {
   state = {
     venues: [],
     start: 0,
-    end: 10,
     active: 1,
     pages: 0
   };
@@ -33,8 +32,7 @@ export default class CardContainer extends Component {
     if (this.state.active < this.state.pages - 1){
     this.setState({
       active: this.state.active + 1,
-      start: this.state.start + 10,
-      end: this.state.end + 10
+      start: this.state.start + 10
     })}
   };
 
@@ -42,11 +40,17 @@ export default class CardContainer extends Component {
     if (this.state.active > 1) {
     this.setState({
       active: this.state.active - 1,
-      start: this.state.start - 10,
-      end: this.state.end - 10
+      start: this.state.start - 10
     })
     }
   };
+
+  jumpPage = (num) => {
+    this.setState({
+      active: num,
+      start: num*10 - 10
+    })
+  }
 
   componentDidMount() {
     this.getVenues();
@@ -54,16 +58,19 @@ export default class CardContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Pagination
           active={this.state.active}
           pages={this.state.pages}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
+          jumpPage={this.jumpPage}
         />
+        <div className="card-deck text-center">
         {this.state.venues
-          .slice(this.state.start, this.state.end)
+          .slice(this.state.start, this.state.start+10)
           .map(venue => this.populateCards(venue))}
+        </div>
       </div>
     );
   }
