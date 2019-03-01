@@ -112,3 +112,9 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.octicon {
+  display: inline-block;
+  vertical-align: text-top;
+  fill: currentColor;
+}

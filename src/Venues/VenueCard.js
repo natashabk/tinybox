@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import P0 from '../Images/Placeholder1.jpg'
-import P1 from '../Images/Placeholder2.jpg'
-import P2 from '../Images/Placeholder3.jpg'
-import P3 from '../Images/Placeholder4.jpg'
-import P4 from '../Images/Placeholder5.jpg'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import P0 from '../Images/Placeholder1.jpg';
+import P1 from '../Images/Placeholder2.jpg';
+import P2 from '../Images/Placeholder3.jpg';
+import P3 from '../Images/Placeholder4.jpg';
+import P4 from '../Images/Placeholder5.jpg';
+import {BeakerIcon} from "octicons";
 
 const placeholders = [P0, P1, P2, P3, P4]
 
@@ -25,6 +26,7 @@ export default class VenueCard extends Component {
       <Card.Title>{this.props.name}</Card.Title>
       <Card.Text>
         {this.props.city}
+        {BeakerIcon}
       </Card.Text>
       <Button variant="primary">Book</Button>
     </Card.Body>

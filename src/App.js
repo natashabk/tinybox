@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./Images/Logo.png";
 import "./Styling/App.css";
 import Home from "./Home";
 import NavBar from "./NavBar";
