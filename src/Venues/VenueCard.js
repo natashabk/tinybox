@@ -44,8 +44,11 @@ export default class VenueCard extends Component {
           <Card.Title>{this.props.name}</Card.Title>
           <Card.Text>{this.props.city}</Card.Text>
           <div className="row" id="card">
-            <div className="col-sm">
-              <LocationIcon />
+            <div
+              className="col-sm"
+              onClick={() => this.props.selectVenue(this.props.name)}
+            >
+              <LocationIcon height={35} width={55} id={this.props.name} />
             </div>
             <div className="col-sm">
               <Button variant="primary">Book</Button>
@@ -55,7 +58,7 @@ export default class VenueCard extends Component {
               onClick={this.toggleFavorite}
               style={{ color: this.setFavoriteColor() }}
             >
-              <HeartIcon />
+              <HeartIcon height={45} width={55} />
             </div>
           </div>
         </Card.Body>

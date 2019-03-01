@@ -14,9 +14,6 @@ export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
-    selectedPlace: {
-      name: ""
-    },
     allMarkers: []
   };
 
@@ -44,17 +41,9 @@ export class MapContainer extends Component {
     );
   }
 
-  onMarkerClick = (props, marker, e) => {
-    const selectedVenue = this.props.venues.filter(v => v.name === props.name)
+  onMarkerClick = (props, marker) => {
+    this.props.selectVenue(props.name)
     this.setState({
-      selectedPlace: {
-        id: selectedVenue[0].id,
-        name: selectedVenue[0].name,
-        city: selectedVenue[0].city,
-        address: selectedVenue[0].address1,
-        listing_text: selectedVenue[0].listing_text,
-        postcode: selectedVenue[0].postcode
-      },
       activeMarker: marker,
       showingInfoWindow: true
     });
@@ -101,7 +90,7 @@ export class MapContainer extends Component {
             >
               <div>
                 <h6>
-                  {this.state.selectedPlace.name}
+                  {this.props.selectedPlace.name}
                 </h6>
               </div>
             </InfoWindow>
@@ -109,7 +98,7 @@ export class MapContainer extends Component {
         </div>
         <div className="col-sm-6" id="venueCol">
           <CardZoom
-            venue={this.state.selectedPlace}
+            venue={this.props.selectedPlace}
           />
         </div>
       </div>

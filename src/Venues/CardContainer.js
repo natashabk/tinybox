@@ -9,7 +9,13 @@ export default class CardContainer extends Component {
   };
 
   populateCard(venue) {
-    return <VenueCard name={venue.name} city={venue.city} />;
+    return (
+      <VenueCard
+        name={venue.name}
+        city={venue.city}
+        selectVenue={this.props.selectVenue}
+      />
+    );
   }
 
   nextPage = () => {

@@ -10,7 +10,7 @@ export default class VenuesContainer extends Component {
     pages: 0,
     loading: true,
     cardView: true,
-    selectedVenue: {}
+    selectedPlace: {}
   };
 
   getVenues() {
@@ -34,6 +34,21 @@ export default class VenuesContainer extends Component {
     });
   }
 
+  selectVenue = (selection) => {
+    const selectedVenue = this.state.venues.filter(v => v.name === selection)
+    this.setState({
+      selectedPlace: {
+        id: selectedVenue[0].id,
+        name: selectedVenue[0].name,
+        city: selectedVenue[0].city,
+        address: selectedVenue[0].address1,
+        listing_text: selectedVenue[0].listing_text,
+        postcode: selectedVenue[0].postcode
+      },
+      cardView: false
+    })
+  }
+
   displayButton() {
       return this.state.cardView?
         <Button id="viewBtn" onClick={() => this.toggleView()}>
@@ -48,6 +63,7 @@ export default class VenuesContainer extends Component {
   }
 
   render() {
+    // console.log(this.state.selectedPlace)
     return (
       <div className="venuesContainer">
        {this.displayButton()}
@@ -57,6 +73,7 @@ export default class VenuesContainer extends Component {
             pages={this.state.pages}
             loading={this.state.loading}
             toggleView={this.toggleView}
+            selectVenue={this.selectVenue}
           />
         ) : (
           <MapContainer
@@ -64,6 +81,8 @@ export default class VenuesContainer extends Component {
             pages={this.state.pages}
             loading={this.state.loading}
             toggleView={this.toggleView}
+            selectedPlace={this.state.selectedPlace}
+            selectVenue={this.selectVenue}
           />
         )}
       </div>
