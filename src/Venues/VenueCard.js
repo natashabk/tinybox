@@ -9,6 +9,7 @@ import P4 from '../Images/Placeholder5.jpg';
 import {LocationIcon, HeartIcon} from 'react-octicons'
 
 
+
 const placeholders = [P0, P1, P2, P3, P4]
 
 export default class VenueCard extends Component {

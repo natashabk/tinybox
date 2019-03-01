@@ -30,7 +30,7 @@ export default class VenuesContainer extends Component {
 
   render() {
     return (
-      <CardContainer
+      <MapContainer
         venues={this.state.venues}
         pages={this.state.pages}
         loading={this.state.loading}
