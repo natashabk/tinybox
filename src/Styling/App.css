@@ -153,6 +153,12 @@ h1 {
   padding-bottom: 5px;
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .cardDetail {
   min-width: 100% !important;
   min-height: 100%;
