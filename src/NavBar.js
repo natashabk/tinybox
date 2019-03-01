@@ -7,7 +7,7 @@ import Logo from './Images/Logo.png'
 export default class NavBar extends Component {
   render() {
     return (
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" fixed="top">
         <Navbar.Brand href="/">
         <img src={Logo} width='30' height='30'/>
         {"  "}TinyBox

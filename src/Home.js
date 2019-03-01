@@ -6,6 +6,8 @@ export default class Home extends Component {
   render() {
     return (
       <div className="homeContainer">
+      <h1>TinyBox</h1>
+      <h4>unique space in the uk.</h4>
       <Form>
         <Form.Group>
           <div id="locationSearch">
