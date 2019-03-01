@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import CardContainer from "./CardContainer";
 import MapContainer from "./MapContainer";
 import Button from "react-bootstrap/Button";
+import { LocationIcon, ArrowLeftIcon, ListUnorderedIcon } from "react-octicons";
 
 export default class VenuesContainer extends Component {
   state = {
     venues: [],
     pages: 0,
     loading: true,
-    cardView: true
+    cardView: true,
+    selectedVenue: {}
   };
 
   getVenues() {
@@ -32,6 +34,15 @@ export default class VenuesContainer extends Component {
     });
   }
 
+  displayButton() {
+      return this.state.cardView?
+        <Button id="viewBtn" onClick={() => this.toggleView()}>
+        <LocationIcon /> Map View </Button>
+          :
+        <Button id="viewBtn" onClick={() => this.toggleView()}>
+        <ListUnorderedIcon /> Back to List </Button>
+  }
+
   componentDidMount() {
     this.getVenues();
   }
@@ -39,9 +50,7 @@ export default class VenuesContainer extends Component {
   render() {
     return (
       <div className="venuesContainer">
-        <Button id="viewBtn" onClick={() => this.toggleView()}>
-          Map View
-        </Button>
+       {this.displayButton()}
         {this.state.cardView ? (
           <CardContainer
             venues={this.state.venues}

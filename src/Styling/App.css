@@ -26,16 +26,22 @@
   min-height: 50%;
 }
 
-.row {
+
+
+#card.row{
   flex-wrap: nowrap;
 }
 
-.viewBtn {
-  margin-top:200px;
+button#viewBtn {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  margin-left: 15px;
 }
 
 .venuesContainer {
   padding-top: 70px;
+  height: 100%;
 }
 
 .container {
@@ -128,11 +134,46 @@
 
 .octicon {
   display: inline-block;
-  vertical-align: -webkit-baseline-middle;
+  vertical-align: middle;
   fill: currentColor;
 }
 
+#map.row{
+  height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .map {
-  width: 60% !important;
-  height: 60% !important;
+  width: 90% !important;
+  height: 100% !important;
+  flex-grow: 2 !important;
+  margin-right: 15px !important;
+  margin-left: 15px !important;
+}
+
+#mapCol {
+  min-width: 300px;
+  height: 90%;
+}
+
+#venueCol {
+  height: 90%;
+  min-width: 300px;
+  background-color: transparent;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.cardDetail {
+  min-width: 100% !important;
+  min-height: 100%;
+}
+
+#detail.card-text {
+  border-top: 1px solid lightgrey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: left;
 }

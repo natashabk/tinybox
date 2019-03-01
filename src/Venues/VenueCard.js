@@ -43,7 +43,7 @@ export default class VenueCard extends Component {
         <Card.Body>
           <Card.Title>{this.props.name}</Card.Title>
           <Card.Text>{this.props.city}</Card.Text>
-          <div className="row">
+          <div className="row" id="card">
             <div className="col-sm">
               <LocationIcon />
             </div>
