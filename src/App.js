@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import "./Styling/App.css";
+
 import Home from "./Home";
+import MapContainer from "./Venues/MapContainer";
 import NavBar from "./NavBar";
 import VenuesContainer from "./Venues/VenuesContainer";
-import MapContainer from "./Venues/MapContainer";
-import { BrowserRouter as Router, Route} from "react-router-dom";
 
 class App extends Component {
   render() {

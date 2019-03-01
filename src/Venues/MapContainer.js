@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-};
-
 const geoURL ="https://maps.googleapis.com/maps/api/geocode/json?address="
 const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U"
+// the key should be in an env file,
+// that uses webpack (in your case cra to fill this dynamically
+// during build time
+// look for libs that do that , specifically for create react app
+// keywoards are env, envfiles, apikeys in create-react-app)
 
 export class MapContainer extends Component {
   state = {
-    showingInfoWindow: false,  //Hides or the shows the infoWindow
-    activeMarker: {},          //Shows the active marker upon click
-    selectedPlace: {},          //Shows the infoWindow to the selected place upon a marker
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
     allMarkers: []
   };
 
@@ -22,19 +22,24 @@ export class MapContainer extends Component {
     fetch(`${geoURL}${addressURL}+${city}${key}`, {
       method: "GET"})
       .then(resp => resp.json())
-      .then(resp => this.generateMarkers(resp.results[0].geometry.location, name));
+      .then(resp => this.marker(resp.results[0].geometry.location, name))
   }
 
-  generateMarkers(coordinates, name) {
-  const newMarker = <Marker
+  marker(coordinates, name) {
+    let newMarker = {}
+    newMarker['name'] = name
+    newMarker['coordinates'] = coordinates
+    this.setState({
+      allMarkers: [...this.state.allMarkers,newMarker]
+    })
+  }
+
+  generateMarker(name, coordinates) {
+  return <Marker
         onClick={this.onMarkerClick}
-        position={{coordinates}}
+        position={coordinates}
         name={name}
       />
-  console.log(newMarker)
-  //  this.setState({
-  //    allMarkers: this.state.allMarkers.push(newMarker)
-  //  })
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -56,7 +61,7 @@ export class MapContainer extends Component {
   componentDidMount() {
     this.props.venues.map(ven=> {
       this.getCoordinates(ven.address1, ven.city, ven.name)
-    })
+        })
   }
 
   render() {
@@ -64,20 +69,23 @@ export class MapContainer extends Component {
       <Map
         google={this.props.google}
         zoom={12}
-        style={mapStyles}
         initialCenter={{
          lat: 53.3241971,
          lng: -6.3157447
         }}
+        className="map"
+        zoomControl="true"
       >
-      {/* {this.state.allMarkers} */}
+      {this.state.allMarkers.map(v => 
+        this.generateMarker(v['name'], v['coordinates'])
+      )}
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
           onClose={this.onClose}
         >
           <div>
-            <h4>{this.state.selectedPlace.name}</h4>
+            <h6>{this.state.selectedPlace.name}</h6>
           </div>
         </InfoWindow>
      
