@@ -6,15 +6,29 @@ import P1 from '../Images/Placeholder2.jpg';
 import P2 from '../Images/Placeholder3.jpg';
 import P3 from '../Images/Placeholder4.jpg';
 import P4 from '../Images/Placeholder5.jpg';
+import {LocationIcon, HeartIcon} from 'react-octicons'
 
 
 const placeholders = [P0, P1, P2, P3, P4]
 
 export default class VenueCard extends Component {
+  state = {
+    favorite: false
+  }
   
   randomPlaceholder() {
     const num = Math.floor(Math.random() * 5)
     return placeholders[num]
+  }
+
+  toggleFavorite = () => {
+    this.setState({
+      favorite: !this.state.favorite
+    })
+  }
+
+  setFavoriteColor() {
+    return this.state.favorite ? "#cc3d55":"rgb(0,0,0,.4)"
   }
 
   render() {
@@ -26,9 +40,17 @@ export default class VenueCard extends Component {
       <Card.Title>{this.props.name}</Card.Title>
       <Card.Text>
         {this.props.city}
-      
       </Card.Text>
-      <Button variant="primary">Book</Button>
+      <div className="row">
+      <div class="col-sm"><LocationIcon/></div>
+      <div class="col-sm"><Button variant="primary">Book</Button></div>
+      <div class="col-sm" 
+        onClick={this.toggleFavorite}
+        style={{color: this.setFavoriteColor()}}
+        > 
+        <HeartIcon/>
+      </div>
+      </div>
     </Card.Body>
   </Card>
     )
