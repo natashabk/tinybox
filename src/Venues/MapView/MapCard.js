@@ -11,11 +11,17 @@ export default class MapCard extends Component {
   }
 
   defaultAddress() {
-    return this.props.venue.address
-      ? `${this.props.venue.address}, ${this.props.venue.city} ${
+    return this.props.venue.address1
+      ? `${this.props.venue.address1}, ${this.props.venue.city} ${
           this.props.venue.postcode
         }`
       : null;
+  }
+
+  defaultImage() {
+    return this.props.venue.imgURL ?
+    <Card.Img variant="top" src={this.props.venue.imgURL} id="cardImg"/> :
+      <div className="cardDetailImg" /> 
   }
 
   displayIcons() {
@@ -30,7 +36,7 @@ export default class MapCard extends Component {
   render() {
     return (
       <Card className="cardDetail">
-        <div className="cardDetailImg" />
+       {this.defaultImage()}
         <Card.Body>
           <Card.Title id="cardDetailTitle">{this.defaultName()}</Card.Title>
           <Card.Subtitle>{this.defaultAddress()}</Card.Subtitle>

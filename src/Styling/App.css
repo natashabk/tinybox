@@ -15,6 +15,7 @@
 
 #card.row {
   flex-wrap: nowrap;
+  color: rgba(0, 0, 0, 0.4)
 }
 
 button#viewBtn {
@@ -139,7 +140,7 @@ nav {
   fill: currentColor;
 }
 
-.octicon:hover {
+.octicon:hover, #favorite {
   color: #8d2537;
 }
 
@@ -148,6 +149,9 @@ nav {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 11px;
 }
 
 .map {
@@ -181,9 +185,7 @@ nav {
 
 
 #detail.card-text {
-  /* border-top: 1px solid #8d2537; */
   padding-top: 15px;
-  padding-bottom: 15px;
   text-align: left;
 }
 
@@ -209,6 +211,10 @@ nav {
 
 #cardDetailTitle {
   color: #cc3d55;
-  padding-top: 25px;
+  /* padding-top: 25px; */
+}
+
+#cardImg {
+  height: 50%;
 }
 

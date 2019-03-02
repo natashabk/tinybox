@@ -9,7 +9,7 @@ export default class NavBar extends Component {
     return (
       <Navbar bg="light" expand="lg" fixed="top">
         <Navbar.Brand href="/">
-        <img src={Logo} width='30' height='30'/>
+        <img src={Logo} width='30' height='30' alt="logo"/>
         {"  "}TinyBox
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

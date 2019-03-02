@@ -11,9 +11,10 @@ export default class CardContainer extends Component {
   populateCard(venue) {
     return (
       <ListCard
-        name={venue.name}
-        city={venue.city}
+        key={venue.id}
+        venue={venue}
         selectVenue={this.props.selectVenue}
+        toggleFavorite={this.props.toggleFavorite}
       />
     );
   }

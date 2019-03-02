@@ -59,7 +59,7 @@ export class MapContainer extends Component {
   };
 
   componentDidMount() {
-    this.props.venues.map(ven => {
+    this.props.venues.forEach(ven => {
       this.getCoordinates(ven.address1, ven.city, ven.name);
     });
   }

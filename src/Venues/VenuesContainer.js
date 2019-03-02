@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CardContainer from "./ListView/CardContainer";
 import MapContainer from "./MapView/MapContainer";
 import Button from "react-bootstrap/Button";
-import { LocationIcon, ArrowLeftIcon, ListUnorderedIcon } from "react-octicons";
+import { LocationIcon, ListUnorderedIcon } from "react-octicons";
 
 export default class VenuesContainer extends Component {
   state = {
@@ -20,76 +20,82 @@ export default class VenuesContainer extends Component {
       headers: { "Content-Type": "application/json" }
     })
       .then(resp => resp.json())
-      .then(resp =>
-        this.setState({
-          venues: resp,
-          pages: resp.length / 10 + 1,
-          loading: false
-        })
-      );
+      .then(resp => this.addAttributes(resp));
   }
 
   getImages() {
-    fetch("https://us-central1-picapi-54803.cloudfunctions.net/venuePictures",{
+    fetch("https://us-central1-picapi-54803.cloudfunctions.net/venuePictures", {
       method: "GET",
-      headers: {"Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" }
     })
-      .then(resp => console.log(resp.json()))
-      .then(resp=> 
+      .then(resp => resp.json())
+      .then(resp =>
         this.setState({
           photos: resp
         })
-        )
+      );
   }
 
   toggleView = () => {
     this.setState({
       cardView: !this.state.cardView
     });
-  }
+  };
 
-  addAttributes = (venue) => {
-    let newVenue = venue
-    const num = Math.floor(Math.random() * 25);
-    newVenue['imgURL'] = num
-    newVenue['favorite'] = false
-    console.log(newVenue)
-  }
-
-  selectVenue = (selection) => {
-    const selectedVenue = this.state.venues.filter(v => v.name === selection)
+  addAttributes = venues => {
+    venues.forEach(v => {
+      const num = Math.floor(Math.random() * 25);
+      v.imgURL = this.state.photos[num];
+      v.favorite = false;
+    });
     this.setState({
-      selectedPlace: {
-        id: selectedVenue[0].id,
-        name: selectedVenue[0].name,
-        city: selectedVenue[0].city,
-        address: selectedVenue[0].address1,
-        listing_text: selectedVenue[0].listing_text,
-        postcode: selectedVenue[0].postcode
-      },
+      venues: venues,
+      pages: venues.length / 10 + 1,
+      loading: false
+    });
+  };
+
+  selectVenue = selection => {
+    const selectedVenue = this.state.venues.filter(v => v.name === selection);
+    this.setState({
+      selectedPlace: selectedVenue[0],
       cardView: false
+    });
+  };
+
+  displayButton() {
+    return this.state.cardView ? (
+      <Button id="viewBtn" onClick={() => this.toggleView()}>
+        <LocationIcon /> Map View{" "}
+      </Button>
+    ) : (
+      <Button id="viewBtn" onClick={() => this.toggleView()}>
+        <ListUnorderedIcon /> Back to List{" "}
+      </Button>
+    );
+  }
+
+  toggleFavorite = id => {
+    let newVenues = this.state.venues.slice()
+    newVenues.forEach(v=> {
+      if (v.id === id) {
+        v.favorite = !v.favorite
+      }
+    })
+    this.setState({
+      venues: newVenues
     })
   }
 
-  displayButton() {
-      return this.state.cardView?
-        <Button id="viewBtn" onClick={() => this.toggleView()}>
-        <LocationIcon /> Map View </Button>
-          :
-        <Button id="viewBtn" onClick={() => this.toggleView()}>
-        <ListUnorderedIcon /> Back to List </Button>
-  }
-
   componentDidMount() {
-    this.getVenues()
-    this.getImages()
+    this.getImages();
+    this.getVenues();
   }
 
   render() {
-    this.state.venues.map(v => this.addAttributes(v))
     return (
       <div className="venuesContainer">
-       {this.displayButton()}
+        {this.displayButton()}
         {this.state.cardView ? (
           <CardContainer
             venues={this.state.venues}
@@ -97,6 +103,7 @@ export default class VenuesContainer extends Component {
             loading={this.state.loading}
             toggleView={this.toggleView}
             selectVenue={this.selectVenue}
+            toggleFavorite={this.toggleFavorite}
           />
         ) : (
           <MapContainer
