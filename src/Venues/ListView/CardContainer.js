@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import VenueCard from "./VenueCard";
+import ListCard from "./ListCard";
 import Pagination from "./Pagination";
 
 export default class CardContainer extends Component {
@@ -10,7 +10,7 @@ export default class CardContainer extends Component {
 
   populateCard(venue) {
     return (
-      <VenueCard
+      <ListCard
         name={venue.name}
         city={venue.city}
         selectVenue={this.props.selectVenue}

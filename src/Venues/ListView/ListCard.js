@@ -4,15 +4,15 @@ import { LocationIcon, HeartIcon } from "react-octicons";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-import P0 from "../Images/Placeholder1.jpg";
-import P1 from "../Images/Placeholder2.jpg";
-import P2 from "../Images/Placeholder3.jpg";
-import P3 from "../Images/Placeholder4.jpg";
-import P4 from "../Images/Placeholder5.jpg";
+import P0 from "../../Images/Placeholder1.jpg";
+import P1 from "../../Images/Placeholder2.jpg";
+import P2 from "../../Images/Placeholder3.jpg";
+import P3 from "../../Images/Placeholder4.jpg";
+import P4 from "../../Images/Placeholder5.jpg";
 
 const placeholders = [P0, P1, P2, P3, P4];
 
-export default class VenueCard extends Component {
+export default class ListCard extends Component {
   state = {
     favorite: false
   };

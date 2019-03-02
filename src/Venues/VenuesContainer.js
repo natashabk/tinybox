@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CardContainer from "./CardContainer";
-import MapContainer from "./MapContainer";
+import CardContainer from "./ListView/CardContainer";
+import MapContainer from "./MapView/MapContainer";
 import Button from "react-bootstrap/Button";
 import { LocationIcon, ArrowLeftIcon, ListUnorderedIcon } from "react-octicons";
 
@@ -10,7 +10,8 @@ export default class VenuesContainer extends Component {
     pages: 0,
     loading: true,
     cardView: true,
-    selectedPlace: {}
+    selectedPlace: {},
+    photos: []
   };
 
   getVenues() {
@@ -28,10 +29,31 @@ export default class VenuesContainer extends Component {
       );
   }
 
+  getImages() {
+    fetch("https://us-central1-picapi-54803.cloudfunctions.net/venuePictures",{
+      method: "GET",
+      headers: {"Content-Type": "application/json" }
+    })
+      .then(resp => console.log(resp.json()))
+      .then(resp=> 
+        this.setState({
+          photos: resp
+        })
+        )
+  }
+
   toggleView = () => {
     this.setState({
       cardView: !this.state.cardView
     });
+  }
+
+  addAttributes = (venue) => {
+    let newVenue = venue
+    const num = Math.floor(Math.random() * 25);
+    newVenue['imgURL'] = num
+    newVenue['favorite'] = false
+    console.log(newVenue)
   }
 
   selectVenue = (selection) => {
@@ -59,11 +81,12 @@ export default class VenuesContainer extends Component {
   }
 
   componentDidMount() {
-    this.getVenues();
+    this.getVenues()
+    this.getImages()
   }
 
   render() {
-    // console.log(this.state.selectedPlace)
+    this.state.venues.map(v => this.addAttributes(v))
     return (
       <div className="venuesContainer">
        {this.displayButton()}

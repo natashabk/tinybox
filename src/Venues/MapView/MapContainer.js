@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import CardZoom from "./CardDetail";
+import MapCard from "./MapCard";
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U";
@@ -89,15 +89,15 @@ export class MapContainer extends Component {
               onClose={this.onClose}
             >
               <div>
-                <h6>
+                <p id="infoBox">
                   {this.props.selectedPlace.name}
-                </h6>
+                </p>
               </div>
             </InfoWindow>
           </Map>
         </div>
         <div className="col-sm-6" id="venueCol">
-          <CardZoom
+          <MapCard
             venue={this.props.selectedPlace}
           />
         </div>
