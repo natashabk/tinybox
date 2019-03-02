@@ -1,3 +1,31 @@
+/* ----------------HOME CONTAINER--------------------- */
+
+.homeContainer {
+  background-image: url("https://images.unsplash.com/photo-1481277542470-605612bd2d61");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-size: cover;
+  padding-top: 180px;
+  color: #cc3d55;
+  h4 {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* ----------------SEARCH FORM--------------------- */
+
+#locationSearch {
+  width: 65%;
+  margin-left: 10px;
+  margin-top: 50px;
+  display: inline-flex;
+  z-index: 5;
+}
+
+/* ----------------FLASHING TEXT--------------------- */
+
 .content {
   position: absolute;
   top: 330px;
@@ -8,6 +36,7 @@
   display: flex;
   width: 80%;
   justify-content: center;
+  pointer-events: none;
   
   color: rgba(0, 0, 0, 0.7);
   

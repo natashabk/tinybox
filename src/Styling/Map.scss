@@ -1,0 +1,48 @@
+/* ----------------CONTAINS MAPCOL & VENUECOL--------------------- */
+
+#map.row {
+  height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 11px;
+}
+
+/* ----------------CONTAINS MAP--------------------- */
+
+#mapCol {
+  min-width: 300px;
+  height: 90%;
+}
+
+/* ----------------CONTAINS CARD OF SELECTED VENUE--------------------- */
+
+#venueCol {
+  height: 90%;
+  min-width: 300px;
+  background-color: transparent;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 30px;
+}
+
+/* ----------------MAP--------------------- */
+
+.map {
+  width: 90% !important;
+  height: 100% !important;
+  flex-grow: 2 !important;
+  margin-right: 15px !important;
+  margin-left: 15px !important;
+}
+
+#infoBox {
+  margin-bottom: 0;
+  font-size: 15px;
+  color: #8d2537;
+  font-weight: bold;
+}
+
+

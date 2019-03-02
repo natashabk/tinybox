@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardContainer from "./ListView/CardContainer";
 import MapContainer from "./MapView/MapContainer";
+import "../Styling/Cards.scss"
 import Button from "react-bootstrap/Button";
 import { LocationIcon, ListUnorderedIcon } from "react-octicons";
 

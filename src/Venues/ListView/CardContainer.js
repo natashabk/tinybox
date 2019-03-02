@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ListCard from "./ListCard";
 import Pagination from "./Pagination";
+import "../../Styling/List.scss"
 
 export default class CardContainer extends Component {
   state = {

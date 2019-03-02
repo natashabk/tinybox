@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import MapCard from "./MapCard";
+import '../../Styling/Map.scss'
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U";

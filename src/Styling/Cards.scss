@@ -1,0 +1,78 @@
+/* ----------------ALL CARDS--------------------- */
+
+.card {
+  min-width: 18rem !important;
+  max-width: 18rem !important;
+  margin-bottom: 15px !important;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ----------------LIST CARD--------------------- */
+.card-img-top {
+  height: 11.5em;
+  width: 100%;
+}
+
+#card.row {
+  flex-wrap: nowrap;
+  color: rgba(0, 0, 0, 0.4)
+}
+
+.cardDetail {
+  min-width: 100% !important;
+  height: 100%;
+}
+
+/* ----------------MAP CARD--------------------- */
+
+.cardDetailImg {
+  background-image: url("https://images.unsplash.com/photo-1519643381401-22c77e60520e");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50%;
+  background-size: cover;
+}
+
+#cardDetailTitle {
+  color: #cc3d55;
+}
+
+#cardImg {
+  height: 50%;
+}
+
+#detail.card-text {
+  padding-top: 15px;
+  text-align: left;
+}
+
+/* ----------------ICONS--------------------- */
+
+.octicon {
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
+}
+
+.octicon:hover, #favorite {
+  color: #8d2537;
+}
+
+/* ----------------'BOOK' BUTTONS--------------------- */
+
+button#viewBtn {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  margin-left: 15px;
+}
+
+.venuesContainer {
+  padding-top: 70px;
+  height: 100%;
+}
