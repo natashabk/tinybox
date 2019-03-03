@@ -7,7 +7,7 @@ export default class ListCard extends Component {
 
   displayFavorite(){
     return this.props.venue.favorite ?
-      "favorite" : null
+      "favorite" : "default"
   }
 
   render() {

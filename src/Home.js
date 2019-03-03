@@ -21,9 +21,9 @@ export default class Home extends Component {
         <h1>TinyBox</h1>
         <div className="content">
           <div className="content__container">
-            <ul class="content__container__list">
+            <ul className="content__container__list">
               {words.map(w => (
-                <li class="content__container__list__item">{w}</li>
+                <li className="content__container__list__item" key={w}>{w}</li>
               ))}
             </ul>
           </div>

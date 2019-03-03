@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardContainer from "./ListView/CardContainer";
 import MapContainer from "./MapView/MapContainer";
+import FavoritesFilter from "./FavoritesFilter";
 import "../Styling/Cards.scss"
 import Button from "react-bootstrap/Button";
 import { LocationIcon, ListUnorderedIcon } from "react-octicons";
@@ -11,6 +12,7 @@ export default class VenuesContainer extends Component {
     pages: 0,
     loading: true,
     cardView: true,
+    faveFilter: false,
     selectedPlace: {},
     photos: []
   };
@@ -97,6 +99,10 @@ export default class VenuesContainer extends Component {
     return (
       <div className="venuesContainer">
         {this.displayButton()}
+        <FavoritesFilter 
+          venues={this.state.venues}
+          faveFilter={this.state.faveFilter}
+        />
         {this.state.cardView ? (
           <CardContainer
             venues={this.state.venues}

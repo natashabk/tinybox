@@ -19,6 +19,7 @@ h1 {
   font-size: 3rem;
 }
 
+
 /* ----------------NAVBAR--------------------- */
 
 nav {
@@ -27,6 +28,10 @@ nav {
 
 .navbar-light .navbar-brand {
   color: #cc3d55;
+}
+
+.navbar-light .navbar-brand:hover {
+  color: #8d2537;
 }
 
 .navbar-light .navbar-toggler {

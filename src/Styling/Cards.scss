@@ -59,9 +59,14 @@
   fill: currentColor;
 }
 
-.octicon:hover, #favorite {
+#favorite {
   color: #8d2537;
 }
+
+#default:hover {
+  color: #8d2537
+}
+
 
 /* ----------------'BOOK' BUTTONS--------------------- */
 
