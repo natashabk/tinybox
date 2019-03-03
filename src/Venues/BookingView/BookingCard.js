@@ -16,7 +16,7 @@ export default class BookingCard extends Component {
           <Card.Body>
             <Card.Title id="cardDetailTitle">{this.props.venue.name}</Card.Title>
             <Card.Subtitle>{this.formatAddress()}</Card.Subtitle>
-            <Card.Text id="detail">{this.props.venue.listing_text}</Card.Text>
+            <Card.Text id="bookDetail">{this.props.venue.listing_text}</Card.Text>
           </Card.Body>
         </Card>
     )

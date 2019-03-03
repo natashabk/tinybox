@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../Styling/Booking.scss";
 import BookingCard from "./BookingCard";
+import DateTime from "./DateTime";
 
 export default class Booking extends Component {
   render () {
@@ -17,9 +18,9 @@ export default class Booking extends Component {
     }
 
     return (
-      <div className="row" >
+      <div className="bookRow" >
         <div className="col-sm-6">
-
+        <DateTime />
         </div>
         <div className="col-sm-6" id="cardCol">
         <BookingCard venue={venue}/> 

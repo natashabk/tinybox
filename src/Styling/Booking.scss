@@ -1,14 +1,32 @@
 #cardCol {
-  padding-top: 100px;
-  padding-right: 50px;
+  min-width: 300px;
 }
 
 .card-body {
   justify-content: center
 }
 
-#detail {
+#bookDetail {
   padding-right: 20px;
   padding-left: 20px;
-  border-top: 1px solid #cc3d55;
+  padding-top: 15px;
+  border-top: 1px solid #cc3d55; 
+}
+
+.bookRow {
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.datepicker {
+  height: 100%;
+  background-color: white;
+  min-width: 300px;
+}
+
+#bookHeader {
+  padding-top: 55px;
+  color: #cc3d55;
 }
