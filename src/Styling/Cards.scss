@@ -20,7 +20,7 @@
 
 #card.row {
   flex-wrap: nowrap;
-  color: rgba(0, 0, 0, 0.4)
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .cardDetail {
@@ -59,22 +59,26 @@
   fill: currentColor;
 }
 
-#favorite {
+.octicon:hover, #default:hover, #favorite {
   color: #8d2537;
 }
 
-#default:hover {
-  color: #8d2537
-}
-
-
 /* ----------------'BOOK' BUTTONS--------------------- */
 
-button#viewBtn {
-  position: fixed;
-  z-index: 5;
-  left: 0;
-  margin-left: 15px;
+button {
+  &#viewBtn {
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    margin-left: 15px;
+  }
+  &#faveBtn {
+    margin-top: 45px;
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    margin-left: 15px;
+  }
 }
 
 .venuesContainer {

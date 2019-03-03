@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
 import "./Styling/App.css";
-
 import Home from "./Home";
 import MapContainer from "./Venues/MapView/MapContainer";
 import NavBar from "./NavBar";
 import VenuesContainer from "./Venues/VenuesContainer";
+import Booking from "./Venues/BookingView/BookingContainer";
 
 class App extends Component {
   render() {
@@ -21,6 +20,7 @@ class App extends Component {
           />
           <Route path="/venues" component={VenuesContainer} />
           <Route path="/map" component={MapContainer} />
+          <Route path="/book" component={Booking} />
         </div>
       </Router>
     );

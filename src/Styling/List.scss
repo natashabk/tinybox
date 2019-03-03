@@ -1,12 +1,16 @@
 /* ----------------PAGINATION--------------------- */
 
-.pagination a {
-  color: #cc3d55;
-}
-
 .page-item.active .page-link {
   background-color: #cc3d55;
   border-color: #cc3d55;
+}
+
+.pagination {
+  justify-content: center;
+  width: 100%;
+  a {
+    color: #cc3d55;
+  }
 }
 
 /* ----------------LOADER--------------------- */
