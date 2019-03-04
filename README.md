@@ -2,8 +2,9 @@ TinyBox is a small React Application built as an code challenge for a job applic
 
 The given API (hosted on Heroku) returns information about 50 different venues.
 
-In order to provide more functionality to the app, I also set up a Firebase API with 25 URLs to stock photos from Unsplash.com. 
+In order to provide more functionality to the app, I also set up a Firebase API with 25 URLs to stock photos of event venues from Unsplash.com. 
 
+I use a Google API key (stored in .env on my machine, or in the Netlify env variables for the hosted site)
 
 
 
