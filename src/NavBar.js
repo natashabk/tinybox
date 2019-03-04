@@ -15,7 +15,7 @@ export default class NavBar extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/venues">Venues</Nav.Link>
+            <Nav.Link onClick={() => this.props.history.push("/venues")}>Venues</Nav.Link>
             <Nav.Link href="https://github.com/natashabuck/tinybox" target="_blank">GitHub</Nav.Link>
           </Nav>
         </Navbar.Collapse>
