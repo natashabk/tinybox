@@ -32,7 +32,7 @@ export default class Home extends Component {
             </div>
           </Form.Group>
         </Form>
-        <Button href="/venues" variant="primary" type="submit">
+        <Button onClick={() => this.props.history.push("/venues")} variant="primary" type="submit">
           Browse All Listings
         </Button>
       </div>

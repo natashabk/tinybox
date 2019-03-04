@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import { LocationIcon, ArrowLeftIcon } from "react-octicons";
 
 export default class DisplayButton extends Component {
-
   displayButton() {
     return this.props.view === "list" ? (
       <Button id="viewBtn1" onClick={() => this.props.toggleView("map")}>
@@ -17,10 +16,6 @@ export default class DisplayButton extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.displayButton()}
-      </div>
-    )
-    }
+    return <div>{this.displayButton()}</div>;
   }
+}

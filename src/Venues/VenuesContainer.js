@@ -7,7 +7,7 @@ import DisplayButton from "./Components/DisplayButton";
 import "../Styling/Cards.scss";
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-const API_KEY = `&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+const API_KEY = `&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
 
 export default class VenuesContainer extends Component {
   state = {
@@ -78,7 +78,7 @@ export default class VenuesContainer extends Component {
     return venues;
   };
 
-  // Toggle between List view, Map view, and Booking view (all use venues) 
+  // Toggle between List view, Map view, and Booking view (all use venues)
 
   toggleView = view => {
     if (view === "list") {
@@ -122,8 +122,8 @@ export default class VenuesContainer extends Component {
     }
   }
 
-  // Toggle between showing User Favorites and All Venues (used in Map and List view) 
- 
+  // Toggle between showing User Favorites and All Venues (used in Map and List view)
+
   toggleFilter = () => {
     this.setState({
       favorites: !this.state.favorites
@@ -150,9 +150,9 @@ export default class VenuesContainer extends Component {
     });
   };
 
-// Select individual venue (used to navigate to Map or Booking)
-// 'selection' is the venue object that will be displayed, 
-// 'action' is 'map' or 'book'
+  // Select individual venue (used to navigate to Map or Booking)
+  // 'selection' is the venue object that will be displayed,
+  // 'action' is 'map' or 'book'
 
   selectVenue = (selection, action) => {
     const selectedVenue = this.state.venues.filter(v => v.name === selection);

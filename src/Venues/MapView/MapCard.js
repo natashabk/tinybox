@@ -19,30 +19,32 @@ export default class MapCard extends Component {
   }
 
   defaultImage() {
-    return this.props.venue.imgURL ?
-    <Card.Img variant="top" src={this.props.venue.imgURL} id="cardImg"/> :
-      <div className="cardDetailImg" /> 
+    return this.props.venue.imgURL ? (
+      <Card.Img variant="top" src={this.props.venue.imgURL} id="cardImg" />
+    ) : (
+      <div className="cardDetailImg" />
+    );
   }
 
-  displayFavorite(){
-    return this.props.venue.favorite ?
-      "favorite" : "default"
+  displayFavorite() {
+    return this.props.venue.favorite ? "favorite" : "default";
   }
 
   displayIcons() {
     return this.props.venue.id ? (
       <div id="mapIcons">
         <div
-        id={this.displayFavorite()}
-        onClick={() => this.props.toggleFavorite(this.props.venue.id)}
+          id={this.displayFavorite()}
+          onClick={() => this.props.toggleFavorite(this.props.venue.id)}
         >
-        <HeartIcon height={45} width={55} />
+          <HeartIcon height={45} width={55} />
         </div>
-        <Button variant="primary"
-        onClick={() =>
-          this.props.selectVenue(this.props.venue.name, "book")
-        }>
-        Book</Button>
+        <Button
+          variant="primary"
+          onClick={() => this.props.selectVenue(this.props.venue.name, "book")}
+        >
+          Book
+        </Button>
       </div>
     ) : null;
   }
@@ -50,7 +52,7 @@ export default class MapCard extends Component {
   render() {
     return (
       <Card className="cardDetail">
-       {this.defaultImage()}
+        {this.defaultImage()}
         <Card.Body>
           <Card.Title id="cardDetailTitle">{this.defaultName()}</Card.Title>
           <Card.Subtitle>{this.defaultAddress()}</Card.Subtitle>

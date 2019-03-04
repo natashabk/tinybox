@@ -3,10 +3,8 @@ import "../../Styling/Booking.scss";
 import BookingVenue from "./BookingVenue";
 import BookingInfoCard from "./BookingInfoCard";
 
-
 export default class Booking extends Component {
   render() {
-
     return (
       <div className="bookRow">
         <div className="col-sm-6" id="bookCol">

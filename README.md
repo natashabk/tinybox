@@ -1,34 +1,64 @@
-TinyBox is a small React Application built as an code challenge for a job application. 
+# TinyBox
 
-The given API (hosted on Heroku) returns information about 50 different venues.
+* [Github repo](https://github.com/natashabuck/tinybox)
+* [App hosted on Netlify](https://tinybox.netlify.com)
 
-In order to provide more functionality to the app, I also set up a Firebase API with 25 URLs to stock photos of event venues from Unsplash.com. 
+## Intro
 
-I use a Google API key (stored in .env on my machine, or in the Netlify env variables for the hosted site)
+TinyBox is a small React Application built as a code challenge for a job application.
+
+There is no real user login, but this demo provides functionality such as booking and favorites that could be implemented for a real account.
+
+## How to run locally
+
+To run the app locally:
+
+```shell
+npm i
+npm start
+```
+
+The server will run on localhost:3000 by default.
+
+You will need an .env file to use any of the Google Maps functionality. 
+Put this _outside_ of the src folder:
+
+```js
+// .env
+
+REACT_APP_GOOGLE_API_KEY={YOUR_API_KEY}
+```
 
 
 
+## Notes on components architecture
 
-From Gavin: 
+### Venues Container
 
-Display venues
+#### State
 
-At https://venue-lister.herokuapp.com/venues there is an end-point that returns information on 50 venues.
-The format of each venue in the response is as follows:
-{
-"id": "edd15587-633a-4bd1-b588-e72254a4f020",
-"name": "Ballsbridge Hotel",
-"address1": "Pembroke Rd",
-"postcode": "D4",
-"city": "Dublin",
-"listing_text": "When it comes to first-class conference facilities Ballsbridge..."
-}
+>The form and buttons on the homepage all direct the user to VenuesContainer. This holds the state, **(most importantly, the 'venues' array)**, which is used for the List view, Map view, and Booking view. It also holds any methods that are used to change the state for these views.
 
-Deliverables
+### Endpoints
 
-  We would like you create a small React application that displays a summary in card style of these venues
+VenuesContainer calls three different endpoints :
 
-  You can choose how to style the layout but we would like to have 10 venues per page displayed, and a way to navigate between the 5 pages of venues.
-  
-  Please include a README file detailing your design decisions and thoughts
+* The given API (hosted on Heroku) returns information about 50 different venues. (called once)
 
+* In order to provide more functionality to the app, I also set up a Firebase API with 25 URLs to stock photos of event venues from Unsplash.com. (called once)
+
+* I use a Google API key (stored locally in .env, or in the Netlify env variables for the hosted site) to retrieve latitude and longitude for each of the venues based on their address. These will be used to display the markers on the Map view. (called once per venue)
+
+### List View
+
+>Displays the photo, name, and city of each venue in card form. It will display ten cards on each page. The pagination is based on the props of the number of venues that the list view passed, so it is flexible for showing the correct number of pages for the whole venues list, or just the 'favorites' list.
+
+### Map View
+
+>This view generates a static map centered in Dublin (where all of the venues are) using the GoogleAPI React library. The visible markers are rendered based on the venues props, so they can be filtered by favorites.
+
+### Booking View
+
+>All cards in the List view and Map view have a "book" button, which sets the selected venue into the "selectedPlace" prop and changes the view to the Booking screen. The user can then choose their start/end dates and times, along with number of guests, and confirm the booking. Once confirmed, they can go back and edit the booking details.
+
+_There are additional comments in the scss files (/Styling) and VenuesContainer.js._

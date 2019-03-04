@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import DateTimePicker from "react-datetime-picker";
 
-
-export default class DateTimePickers extends Component{
-  
+export default class DateTimePickers extends Component {
   render() {
     return (
       <div>

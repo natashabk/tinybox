@@ -18,7 +18,9 @@ export default class ListCard extends Component {
           <div className="row" id="card">
             <div
               className="col-sm"
-              onClick={() => this.props.selectVenue(this.props.venue.name, "map")}
+              onClick={() =>
+                this.props.selectVenue(this.props.venue.name, "map")
+              }
             >
               <LocationIcon height={35} width={55} id={this.props.venue.name} />
             </div>
