@@ -1,3 +1,12 @@
+/* ----------------CONTAINERS--------------------- */
+
+.bookRow {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 #cardCol {
   min-width: 300px;
   margin-bottom: 10px;
@@ -11,48 +20,24 @@
   padding-left: 30px;
 }
 
-.card-body {
-  justify-content: center
+/* ----------------INTERACTIVE BOOKING--------------------- */
+
+#noInput {
+  display: none;
 }
 
-#bookDetail {
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #cc3d55; 
-}
-
-.bookRow {
-  margin-top: 75px;
+#guests {
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.datepicker {
-  height: 100%;
-  background-color: white;
-  min-width: 300px;
-  border: 1px solid rgba(0,0,0,.125);
-}
-
-#bookHeader {
-  padding-top: 55px;
-  color: #cc3d55;
+  flex-direction: column;
+  align-items: center;
 }
 
 #bookForm {
   padding: 15px;
   h4 {
-    color: rgba(0,0,0,0.4);
+    color: rgba(0, 0, 0, 0.4);
     font-size: 1.2rem;
-    text-align: left;
-    padding-left: 40px;
   }
-}
-
-.react-calendar__month-view__days__day--weekend {
-  color: black !important;
 }
 
 #guests.form-group {
@@ -71,24 +56,45 @@
   width: 50%;
 }
 
-#noInput {
-  display: none;
+.datepicker {
+  height: 100%;
+  background-color: white;
+  min-width: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-#guests {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#bookHeader {
+  padding-top: 55px;
+  color: #cc3d55;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-   opacity: 1;
+/* ----------------DATE/TIME PICKER--------------------- */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
 }
 
-#backBtn {
-  position: fixed;
-  z-index: 5;
-  left: 0;
-  margin-left: 15px;
+.react-calendar__month-view__days__day--weekend {
+  color: black !important;
+}
+
+#endDate {
+  margin-bottom: 0;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #cc3d55;
+}
+
+/* ----------------VENUE DISPLAY--------------------- */
+
+.card-body {
+  justify-content: center;
+}
+
+#bookDetail {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #cc3d55;
 }

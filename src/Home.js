@@ -3,16 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Styling/Home.scss";
 
-const words = [
-  "event",
-  "workspace",
-  "conference",
-  "office party",
-  "offsite",
-  "training",
-  "screening",
-  "anything"
-];
+const words = ["event", "conference", "office party", "offsite"];
 
 export default class Home extends Component {
   render() {
@@ -22,8 +13,10 @@ export default class Home extends Component {
         <div className="content">
           <div className="content__container">
             <ul className="content__container__list">
-              {words.map(w => (
-                <li className="content__container__list__item" key={w}>{w}</li>
+              {words.map(word => (
+                <li className="content__container__list__item" key={word}>
+                  {word}
+                </li>
               ))}
             </ul>
           </div>

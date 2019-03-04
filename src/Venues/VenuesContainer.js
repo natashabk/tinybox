@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import CardContainer from "./ListView/CardContainer";
 import MapContainer from "./MapView/MapContainer";
-import BookingContainer from "./BookingView/BookingContainer"
+import BookingContainer from "./BookingView/BookingContainer";
 import FilterButton from "./Components/FilterButton";
 import DisplayButton from "./Components/DisplayButton";
 import "../Styling/Cards.scss";
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U";
-// the key should be in an env file,
-// that uses webpack (in your case cra to fill this dynamically
-// during build time
-// look for libs that do that , specifically for create react app
-// keywoards are env, envfiles, apikeys in create-react-app)
+const API_KEY = `&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
 
 export default class VenuesContainer extends Component {
   state = {
@@ -21,9 +16,11 @@ export default class VenuesContainer extends Component {
     view: "list",
     favorites: false,
     selectedPlace: {},
-    photos: [],
-    coordinates: []
+    photos: []
   };
+
+  // Build complete venues array with initial data, stock photos from Firebase API,
+  // and latitude/longitude from Google Maps API (used for markers in MapView)
 
   getVenues() {
     fetch("https://venue-lister.herokuapp.com/venues", {
@@ -32,7 +29,7 @@ export default class VenuesContainer extends Component {
     })
       .then(resp => resp.json())
       .then(resp => this.addAttributes(resp))
-      .then(resp => this.getCoordinates(resp))
+      .then(resp => this.getCoordinates(resp));
   }
 
   getImages() {
@@ -49,23 +46,24 @@ export default class VenuesContainer extends Component {
   }
 
   getCoordinates = venues => {
-    let newVenues = venues.slice()
+    let newVenues = venues.slice();
     newVenues.forEach(v => {
-      const address = v.address1;
-      const city = v.city;
-      v.coordinates = {}
-      fetch(`${geoURL}${address.replace(/[, ]+|[']+/g, "+").trim()}+${city}${key}`, {
-        method: "GET"
-      })
+      v.coordinates = {};
+      fetch(
+        `${geoURL}${v.address1.replace(/[, ]+|[']+/g, "+").trim()}+${
+          v.city
+        }${API_KEY}`,
+        {
+          method: "GET"
+        }
+      )
         .then(resp => resp.json())
-        .then(resp =>
-          v.coordinates = resp.results[0].geometry.location
-        )
-    })
+        .then(resp => (v.coordinates = resp.results[0].geometry.location));
+    });
     this.setState({
       venues: newVenues
-    })
-  }
+    });
+  };
 
   addAttributes = venues => {
     venues.forEach(v => {
@@ -76,50 +74,56 @@ export default class VenuesContainer extends Component {
     this.setState({
       venues: venues,
       loading: false
-    })
-    return venues
+    });
+    return venues;
   };
+
+  // Toggle between List view, Map view, and Booking view (all use venues) 
 
   toggleView = view => {
     if (view === "list") {
-    this.setState({
-      view: "list"
-    })
-  } else if (view === "map") {
-    this.setState({
-      view: "map"
-    })
-  } else if (view === "book") {
-    this.setState({
-      view: "book"
-    })
+      this.setState({
+        view: "list"
+      });
+    } else if (view === "map") {
+      this.setState({
+        view: "map"
+      });
+    } else if (view === "book") {
+      this.setState({
+        view: "book"
+      });
     }
   };
 
   displayedPage() {
     if (this.state.view === "list") {
-      return <CardContainer
-            venues={this.filteredVenues()}
-            loading={this.state.loading}
-            toggleView={this.toggleView}
-            selectVenue={this.selectVenue}
-            toggleFavorite={this.toggleFavorite}
-          />
+      return (
+        <CardContainer
+          venues={this.filteredVenues()}
+          loading={this.state.loading}
+          toggleView={this.toggleView}
+          selectVenue={this.selectVenue}
+          toggleFavorite={this.toggleFavorite}
+        />
+      );
     } else if (this.state.view === "map") {
-      return <MapContainer
-            venues={this.filteredVenues()}
-            toggleView={this.toggleView}
-            selectedPlace={this.state.selectedPlace}
-            selectVenue={this.selectVenue}
-            toggleFavorite={this.toggleFavorite}
-          />
+      return (
+        <MapContainer
+          venues={this.filteredVenues()}
+          toggleView={this.toggleView}
+          selectedPlace={this.state.selectedPlace}
+          selectVenue={this.selectVenue}
+          toggleFavorite={this.toggleFavorite}
+        />
+      );
     } else if (this.state.view === "book") {
-      return <BookingContainer 
-        venue={this.state.selectedPlace}
-      />
+      return <BookingContainer venue={this.state.selectedPlace} />;
     }
   }
 
+  // Toggle between showing User Favorites and All Venues (used in Map and List view) 
+ 
   toggleFilter = () => {
     this.setState({
       favorites: !this.state.favorites
@@ -132,13 +136,7 @@ export default class VenuesContainer extends Component {
       : this.state.venues;
   }
 
-  selectVenue = (selection, action) => {
-    const selectedVenue = this.state.venues.filter(v => v.name === selection);
-    this.setState({
-      selectedPlace: selectedVenue[0],
-      view: action
-    });
-  };
+  // Toggle individual venue favorite (used in Map and List view)
 
   toggleFavorite = id => {
     let newVenues = this.state.venues.slice();
@@ -152,6 +150,18 @@ export default class VenuesContainer extends Component {
     });
   };
 
+// Select individual venue (used to navigate to Map or Booking)
+// 'selection' is the venue object that will be displayed, 
+// 'action' is 'map' or 'book'
+
+  selectVenue = (selection, action) => {
+    const selectedVenue = this.state.venues.filter(v => v.name === selection);
+    this.setState({
+      selectedPlace: selectedVenue[0],
+      view: action
+    });
+  };
+
   componentDidMount() {
     this.getImages();
     this.getVenues();
@@ -160,13 +170,11 @@ export default class VenuesContainer extends Component {
   render() {
     return (
       <div className="venuesContainer">
-        <DisplayButton
-          view={this.state.view}
-          toggleView={this.toggleView}
-        />
+        <DisplayButton view={this.state.view} toggleView={this.toggleView} />
         <FilterButton
           favorites={this.state.favorites}
           toggleFilter={this.toggleFilter}
+          view={this.state.view}
         />
         {this.displayedPage()}
       </div>

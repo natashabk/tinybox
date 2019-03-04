@@ -67,7 +67,7 @@ export default class BookingInfoCard extends Component {
         <h2 id="bookHeader">{this.title()}</h2>
         {this.details()}
         <div id="bookForm">
-          <h4>Expected guests:{this.guestCountDisplay()}</h4>
+          <h4>Expected guests:{"    "}{this.guestCountDisplay()}</h4>
           <Form onSubmit={this.confirm}>
             <Form.Group id="guests">
               <div id="guests">

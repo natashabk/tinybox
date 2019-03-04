@@ -66,18 +66,45 @@
 /* ----------------'BOOK' BUTTONS--------------------- */
 
 button {
-  &#viewBtn {
+  :focus {
+    box-shadow: 0;
+  }
+
+  &#viewBtn0 {
     position: fixed;
     z-index: 5;
     left: 0;
     margin-left: 15px;
+    background-color: #cc3d55;
+    color: #ffff;
   }
-  &#faveBtn {
+
+  &#viewBtn1 {
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    margin-left: 15px;
+    background-color: white;
+    border: 2px solid #cc3d55;
+    color: #cc3d55;
+  }
+
+  &#faveBtn0 {
     margin-top: 45px;
     position: fixed;
     z-index: 5;
     left: 0;
     margin-left: 15px;
+  }
+  &#faveBtn1{
+    margin-top: 45px;
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    margin-left: 15px;
+    background-color: white;
+    border: 2px solid #cc3d55;
+    color: #cc3d55;
   }
 }
 

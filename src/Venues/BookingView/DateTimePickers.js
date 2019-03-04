@@ -23,7 +23,9 @@ export default class DateTimePickers extends Component{
             value={this.props.endDate}
             disableClock={true}
             clearIcon={null}
+            minDate={this.props.startDate}
           />
+          <p id="endDate"> (Must be after start date) </p>
         </div>
       </div>
     );
