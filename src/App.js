@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./Styling/App.css";
 import Home from "./Home";
-import MapContainer from "./Venues/MapView/MapContainer";
 import NavBar from "./NavBar";
 import VenuesContainer from "./Venues/VenuesContainer";
 import Booking from "./Venues/BookingView/BookingContainer";
@@ -18,9 +17,14 @@ class App extends Component {
             path="/"
             component={routerProps => <Home {...routerProps} />}
           />
-          <Route path="/venues" component={VenuesContainer} />
-          <Route path="/map" component={MapContainer} />
-          <Route path="/book" component={Booking} />
+          <Route
+            path="/venues"
+            component={routerProps => <VenuesContainer {...routerProps} />}
+          />
+          <Route
+            path="/book/:venue_id"
+            component={routerProps => <Booking {...routerProps} />}
+          />
         </div>
       </Router>
     );

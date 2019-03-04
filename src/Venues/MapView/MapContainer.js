@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import MapCard from "./MapCard";
-import '../../Styling/Map.scss'
+import "../../Styling/Map.scss";
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U";
@@ -18,6 +18,7 @@ export class MapContainer extends Component {
     allMarkers: []
   };
 
+  // rename!
   getCoordinates(address, city, name) {
     const addressURL = address.replace(/[, ]+|[']+/g, "+").trim();
     fetch(`${geoURL}${addressURL}+${city}${key}`, {
@@ -27,6 +28,10 @@ export class MapContainer extends Component {
       .then(resp => this.marker(resp.results[0].geometry.location, name));
   }
 
+  // change
+  // the
+  // func
+  // name
   marker(coordinates, name) {
     let newMarker = {};
     newMarker["name"] = name;
@@ -38,17 +43,22 @@ export class MapContainer extends Component {
 
   generateMarker(name, coordinates) {
     return (
-      <Marker onClick={this.onMarkerClick} position={coordinates} name={name} />
+      <Marker
+        onClick={this.onMarkerClick}
+        position={coordinates}
+        name={name}
+        key={name + coordinates.lat}
+      />
     );
   }
 
   onMarkerClick = (props, marker) => {
-    this.props.selectVenue(props.name)
+    this.props.selectVenue(props.name, "map");
     this.setState({
       activeMarker: marker,
       showingInfoWindow: true
     });
-  }
+  };
 
   onClose = props => {
     if (this.state.showingInfoWindow) {
@@ -81,8 +91,8 @@ export class MapContainer extends Component {
             mapTypeControl={false}
             fullscreenControl={false}
           >
-            {this.state.allMarkers.map(v =>
-              this.generateMarker(v["name"], v["coordinates"])
+            {this.state.allMarkers.map(venue =>
+              this.generateMarker(venue["name"], venue["coordinates"])
             )}
             <InfoWindow
               marker={this.state.activeMarker}
@@ -90,9 +100,7 @@ export class MapContainer extends Component {
               onClose={this.onClose}
             >
               <div>
-                <p id="infoBox">
-                  {this.props.selectedPlace.name}
-                </p>
+                <p id="infoBox">{this.props.selectedPlace.name}</p>
               </div>
             </InfoWindow>
           </Map>
@@ -100,6 +108,7 @@ export class MapContainer extends Component {
         <div className="col-sm-6" id="venueCol">
           <MapCard
             venue={this.props.selectedPlace}
+            selectVenue={this.props.selectVenue}
             toggleFavorite={this.props.toggleFavorite}
           />
         </div>
@@ -108,6 +117,7 @@ export class MapContainer extends Component {
   }
 }
 
+// get the api key out to some .config file
 export default GoogleApiWrapper({
   apiKey: "AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U"
 })(MapContainer);

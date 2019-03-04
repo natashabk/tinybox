@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import CardContainer from "./ListView/CardContainer";
 import MapContainer from "./MapView/MapContainer";
+import BookingContainer from "./BookingView/BookingContainer"
 import FilterButton from "./Components/FilterButton";
 import DisplayButton from "./Components/DisplayButton";
-import "../Styling/Cards.scss"
+import "../Styling/Cards.scss";
 
 export default class VenuesContainer extends Component {
   state = {
     venues: [],
     loading: true,
-    cardView: true,
+    view: "list",
     favorites: false,
     selectedPlace: {},
     photos: []
@@ -49,43 +50,77 @@ export default class VenuesContainer extends Component {
     });
   };
 
-  toggleView = () => {
+  toggleView = view => {
+    if (view === "list") {
     this.setState({
-      cardView: !this.state.cardView
+      view: "list"
     })
+  } else if (view === "map") {
+    this.setState({
+      view: "map"
+    })
+  } else if (view === "book") {
+    this.setState({
+      view: "book"
+    })
+    }
+  };
+
+  displayedPage() {
+    if (this.state.view === "list") {
+      return <CardContainer
+            venues={this.filteredVenues()}
+            loading={this.state.loading}
+            toggleView={this.toggleView}
+            selectVenue={this.selectVenue}
+            toggleFavorite={this.toggleFavorite}
+          />
+    } else if (this.state.view === "map") {
+      return <MapContainer
+            venues={this.filteredVenues()}
+            toggleView={this.toggleView}
+            selectedPlace={this.state.selectedPlace}
+            selectVenue={this.selectVenue}
+            toggleFavorite={this.toggleFavorite}
+          />
+    } else if (this.state.view === "book") {
+      return <BookingContainer 
+        venue={this.state.selectedPlace}
+      />
+    }
   }
-  
+
   toggleFilter = () => {
     this.setState({
       favorites: !this.state.favorites
-    })
-  }
+    });
+  };
 
   filteredVenues() {
-    return this.state.favorites ? 
-      this.state.venues.filter(v => v.favorite === true)
-      : this.state.venues
+    return this.state.favorites
+      ? this.state.venues.filter(v => v.favorite === true)
+      : this.state.venues;
   }
 
-  selectVenue = selection => {
+  selectVenue = (selection, action) => {
     const selectedVenue = this.state.venues.filter(v => v.name === selection);
     this.setState({
       selectedPlace: selectedVenue[0],
-      cardView: false
+      view: action
     });
   };
 
   toggleFavorite = id => {
-    let newVenues = this.state.venues.slice()
-    newVenues.forEach(v=> {
+    let newVenues = this.state.venues.slice();
+    newVenues.forEach(v => {
       if (v.id === id) {
-        v.favorite = !v.favorite
+        v.favorite = !v.favorite;
       }
-    })
+    });
     this.setState({
-      venues: newVenues,
-    })
-  }
+      venues: newVenues
+    });
+  };
 
   componentDidMount() {
     this.getImages();
@@ -95,31 +130,15 @@ export default class VenuesContainer extends Component {
   render() {
     return (
       <div className="venuesContainer">
-        <DisplayButton 
-          cardView={this.state.cardView}
+        <DisplayButton
+          view={this.state.view}
           toggleView={this.toggleView}
         />
-        <FilterButton 
+        <FilterButton
           favorites={this.state.favorites}
           toggleFilter={this.toggleFilter}
         />
-        {this.state.cardView ? (
-          <CardContainer
-            venues={this.filteredVenues()}
-            loading={this.state.loading}
-            toggleView={this.toggleView}
-            selectVenue={this.selectVenue}
-            toggleFavorite={this.toggleFavorite}
-          />
-        ) : (
-          <MapContainer
-            venues={this.filteredVenues()}
-            toggleView={this.toggleView}
-            selectedPlace={this.state.selectedPlace}
-            selectVenue={this.selectVenue}
-            toggleFavorite={this.toggleFavorite}
-          />
-        )}
+        {this.displayedPage()}
       </div>
     );
   }

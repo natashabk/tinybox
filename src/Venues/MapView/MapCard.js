@@ -38,7 +38,11 @@ export default class MapCard extends Component {
         >
         <HeartIcon height={45} width={55} />
         </div>
-        <Button variant="primary">Book</Button>
+        <Button variant="primary"
+        onClick={() =>
+          this.props.selectVenue(this.props.venue.name, "book")
+        }>
+        Book</Button>
       </div>
     ) : null;
   }

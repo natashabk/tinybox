@@ -4,10 +4,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 export default class ListCard extends Component {
-
-  displayFavorite(){
-    return this.props.venue.favorite ?
-      "favorite" : "default"
+  displayFavorite() {
+    return this.props.venue.favorite ? "favorite" : "default";
   }
 
   render() {
@@ -20,15 +18,23 @@ export default class ListCard extends Component {
           <div className="row" id="card">
             <div
               className="col-sm"
-              onClick={() => this.props.selectVenue(this.props.venue.name)}
+              onClick={() => this.props.selectVenue(this.props.venue.name, "map")}
             >
               <LocationIcon height={35} width={55} id={this.props.venue.name} />
             </div>
             <div className="col-sm">
-              <Button variant="primary">Book</Button>
+              <Button
+                variant="primary"
+                onClick={() =>
+                  this.props.selectVenue(this.props.venue.name, "book")
+                }
+              >
+                Book
+              </Button>
             </div>
             <div
-              className="col-sm" id={this.displayFavorite()}
+              className="col-sm"
+              id={this.displayFavorite()}
               onClick={() => this.props.toggleFavorite(this.props.venue.id)}
             >
               <HeartIcon height={45} width={55} />

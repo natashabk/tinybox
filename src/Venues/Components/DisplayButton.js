@@ -5,12 +5,12 @@ import { LocationIcon, ListUnorderedIcon } from "react-octicons";
 export default class DisplayButton extends Component {
 
   displayButton() {
-    return this.props.cardView ? (
-      <Button id="viewBtn" onClick={() => this.props.toggleView("page")}>
+    return this.props.view === "list" ? (
+      <Button id="viewBtn" onClick={() => this.props.toggleView("map")}>
         <LocationIcon /> Map View{" "}
       </Button>
     ) : (
-      <Button id="viewBtn" onClick={() => this.props.toggleView("page")}>
+      <Button id="viewBtn" onClick={() => this.props.toggleView("list")}>
         <ListUnorderedIcon /> Back to List{" "}
       </Button>
     );

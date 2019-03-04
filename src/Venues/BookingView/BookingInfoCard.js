@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import DateTimePicker from "react-datetime-picker";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import DateTimePickers from "./DateTimePickers";
@@ -16,54 +15,51 @@ export default class BookingInfoCard extends Component {
   changeEnd = endDate => this.setState({ endDate });
 
   title() {
-    return this.state.confirmed ?
-      "Confirmed!" : "Ready to Book?"
+    return this.state.confirmed ? "Confirmed!" : "Ready to Book?";
   }
 
   details() {
-    return this.state.confirmed ?
-    <div>
-    <p>You're going to:</p>
-    <h4>{this.props.venue.name}</h4>
-    <p>{this.state.startDate.toDateString()}</p>
-    </div>
-    :
-    <DateTimePickers 
-      changeStart={this.changeStart}
-      changeEnd={this.changeEnd}
-      startDate={this.state.startDate}
-      endDate={this.state.endDate}
-    />
+    return this.state.confirmed ? (
+      <div>
+        <p>You're going to:</p>
+        <h4>{this.props.venue.name}</h4>
+        <p>{this.state.startDate.toDateString()}</p>
+      </div>
+    ) : (
+      <DateTimePickers
+        changeStart={this.changeStart}
+        changeEnd={this.changeEnd}
+        startDate={this.state.startDate}
+        endDate={this.state.endDate}
+      />
+    );
   }
 
   guestFormDisplay() {
-    return this.state.confirmed ?
-      "noInput" : "guestInput" 
+    return this.state.confirmed ? "noInput" : "guestInput";
   }
 
   guestCountDisplay() {
-    return this.state.confirmed ?
-      this.state.guests:null
+    return this.state.confirmed ? this.state.guests : null;
   }
 
   buttonText() {
-    return this.state.confirmed ?
-      "Edit Event" : "Confirm Booking"
+    return this.state.confirmed ? "Edit Event" : "Confirm Booking";
   }
 
-  confirm =(e)=> {
+  confirm = e => {
     e.preventDefault();
     this.setState({
       confirmed: !this.state.confirmed
-    })
-  }
+    });
+  };
 
-  guestChange=(e) => {
+  guestChange = e => {
     e.preventDefault();
     this.setState({
       guests: e.target.value
-    })
-  }
+    });
+  };
 
   render() {
     return (
