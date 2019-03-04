@@ -6,6 +6,14 @@ import FilterButton from "./Components/FilterButton";
 import DisplayButton from "./Components/DisplayButton";
 import "../Styling/Cards.scss";
 
+const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U";
+// the key should be in an env file,
+// that uses webpack (in your case cra to fill this dynamically
+// during build time
+// look for libs that do that , specifically for create react app
+// keywoards are env, envfiles, apikeys in create-react-app)
+
 export default class VenuesContainer extends Component {
   state = {
     venues: [],
@@ -13,7 +21,8 @@ export default class VenuesContainer extends Component {
     view: "list",
     favorites: false,
     selectedPlace: {},
-    photos: []
+    photos: [],
+    coordinates: []
   };
 
   getVenues() {
@@ -22,7 +31,8 @@ export default class VenuesContainer extends Component {
       headers: { "Content-Type": "application/json" }
     })
       .then(resp => resp.json())
-      .then(resp => this.addAttributes(resp));
+      .then(resp => this.addAttributes(resp))
+      .then(resp => this.getCoordinates(resp))
   }
 
   getImages() {
@@ -38,6 +48,25 @@ export default class VenuesContainer extends Component {
       );
   }
 
+  getCoordinates = venues => {
+    let newVenues = venues.slice()
+    newVenues.forEach(v => {
+      const address = v.address1;
+      const city = v.city;
+      v.coordinates = {}
+      fetch(`${geoURL}${address.replace(/[, ]+|[']+/g, "+").trim()}+${city}${key}`, {
+        method: "GET"
+      })
+        .then(resp => resp.json())
+        .then(resp =>
+          v.coordinates = resp.results[0].geometry.location
+        )
+    })
+    this.setState({
+      venues: newVenues
+    })
+  }
+
   addAttributes = venues => {
     venues.forEach(v => {
       const num = Math.floor(Math.random() * 25);
@@ -47,7 +76,8 @@ export default class VenuesContainer extends Component {
     this.setState({
       venues: venues,
       loading: false
-    });
+    })
+    return venues
   };
 
   toggleView = view => {

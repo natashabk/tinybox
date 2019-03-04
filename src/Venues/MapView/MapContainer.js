@@ -3,43 +3,11 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import MapCard from "./MapCard";
 import "../../Styling/Map.scss";
 
-const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-const key = "&key=AIzaSyD22bjcOaQlswMChJ_aHJqBh0R8To6cZ9U";
-// the key should be in an env file,
-// that uses webpack (in your case cra to fill this dynamically
-// during build time
-// look for libs that do that , specifically for create react app
-// keywoards are env, envfiles, apikeys in create-react-app)
-
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
-    activeMarker: {},
-    allMarkers: []
+    activeMarker: {}
   };
-
-  // rename!
-  getCoordinates(address, city, name) {
-    const addressURL = address.replace(/[, ]+|[']+/g, "+").trim();
-    fetch(`${geoURL}${addressURL}+${city}${key}`, {
-      method: "GET"
-    })
-      .then(resp => resp.json())
-      .then(resp => this.marker(resp.results[0].geometry.location, name));
-  }
-
-  // change
-  // the
-  // func
-  // name
-  marker(coordinates, name) {
-    let newMarker = {};
-    newMarker["name"] = name;
-    newMarker["coordinates"] = coordinates;
-    this.setState({
-      allMarkers: [...this.state.allMarkers, newMarker]
-    });
-  }
 
   generateMarker(name, coordinates) {
     return (
@@ -69,12 +37,6 @@ export class MapContainer extends Component {
     }
   };
 
-  componentDidMount() {
-    this.props.venues.forEach(ven => {
-      this.getCoordinates(ven.address1, ven.city, ven.name);
-    });
-  }
-
   render() {
     return (
       <div className="row" id="map">
@@ -91,8 +53,8 @@ export class MapContainer extends Component {
             mapTypeControl={false}
             fullscreenControl={false}
           >
-            {this.state.allMarkers.map(venue =>
-              this.generateMarker(venue["name"], venue["coordinates"])
+            {this.props.venues.map(venue =>
+              this.generateMarker(venue.name, venue.coordinates)
             )}
             <InfoWindow
               marker={this.state.activeMarker}
