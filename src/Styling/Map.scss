@@ -28,6 +28,19 @@
   padding-left: 30px;
 }
 
+#mapIcons {
+  display: inline-flex;
+  
+}
+
+#default {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#default:hover {
+  color: #8d2537;
+}
+
 /* ----------------MAP--------------------- */
 
 .map {

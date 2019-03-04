@@ -7,12 +7,10 @@ import "../Styling/Cards.scss"
 
 export default class VenuesContainer extends Component {
   state = {
-    allVenues: [],
-    filteredVenues: [],
-    pages: 0,
+    venues: [],
     loading: true,
     cardView: true,
-    filterView: false,
+    favorites: false,
     selectedPlace: {},
     photos: []
   };
@@ -46,37 +44,31 @@ export default class VenuesContainer extends Component {
       v.favorite = false;
     });
     this.setState({
-      allVenues: venues,
-      filteredVenues: venues,
-      pages: venues.length / 10 + 1,
+      venues: venues,
       loading: false
     });
   };
 
-  toggleView = (view) => {
-    if (view === "page") {
+  toggleView = () => {
     this.setState({
       cardView: !this.state.cardView
     })
-    } else if (view === "filterOn") {
-      let fv = this.state.allVenues.filter(v => v.favorite === true)
-      this.setState({
-        filterView: true,
-        filteredVenues: fv,
-        pages: fv.length / 10 + 1 
-      })
-    } else if (view ==="filterOff") {
-      let fv = this.state.allVenues
-      this.setState({
-        filterView: false,
-        filteredVenues: fv,
-        pages: fv.length / 10 + 1 
-      })
-    }
-  };
+  }
+  
+  toggleFilter = () => {
+    this.setState({
+      favorites: !this.state.favorites
+    })
+  }
+
+  filteredVenues() {
+    return this.state.favorites ? 
+      this.state.venues.filter(v => v.favorite === true)
+      : this.state.venues
+  }
 
   selectVenue = selection => {
-    const selectedVenue = this.state.allVenues.filter(v => v.name === selection);
+    const selectedVenue = this.state.venues.filter(v => v.name === selection);
     this.setState({
       selectedPlace: selectedVenue[0],
       cardView: false
@@ -84,14 +76,14 @@ export default class VenuesContainer extends Component {
   };
 
   toggleFavorite = id => {
-    let newVenues = this.state.allVenues.slice()
+    let newVenues = this.state.venues.slice()
     newVenues.forEach(v=> {
       if (v.id === id) {
         v.favorite = !v.favorite
       }
     })
     this.setState({
-      allVenues: newVenues
+      venues: newVenues,
     })
   }
 
@@ -108,13 +100,12 @@ export default class VenuesContainer extends Component {
           toggleView={this.toggleView}
         />
         <FilterButton 
-          filterView={this.state.filterView}
-          toggleView={this.toggleView}
+          favorites={this.state.favorites}
+          toggleFilter={this.toggleFilter}
         />
         {this.state.cardView ? (
           <CardContainer
-            venues={this.state.filteredVenues}
-            pages={this.state.pages}
+            venues={this.filteredVenues()}
             loading={this.state.loading}
             toggleView={this.toggleView}
             selectVenue={this.selectVenue}
@@ -122,11 +113,11 @@ export default class VenuesContainer extends Component {
           />
         ) : (
           <MapContainer
-            venues={this.state.filteredVenues}
-            loading={this.state.loading}
+            venues={this.filteredVenues()}
             toggleView={this.toggleView}
             selectedPlace={this.state.selectedPlace}
             selectVenue={this.selectVenue}
+            toggleFavorite={this.toggleFavorite}
           />
         )}
       </div>

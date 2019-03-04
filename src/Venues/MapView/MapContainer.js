@@ -100,6 +100,7 @@ export class MapContainer extends Component {
         <div className="col-sm-6" id="venueCol">
           <MapCard
             venue={this.props.selectedPlace}
+            toggleFavorite={this.props.toggleFavorite}
           />
         </div>
       </div>

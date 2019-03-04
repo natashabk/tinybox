@@ -51,7 +51,7 @@ export default class CardContainer extends Component {
     ) : (
       <Pagination
         active={this.state.active}
-        pages={this.props.pages}
+        pages={this.props.venues.length / 10 + 1}
         nextPage={this.nextPage}
         prevPage={this.prevPage}
         jumpPage={this.jumpPage}

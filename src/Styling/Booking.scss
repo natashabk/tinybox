@@ -1,5 +1,14 @@
 #cardCol {
   min-width: 300px;
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+
+#bookCol {
+  margin-bottom: 10px;
+  margin-top: 8px;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 .card-body {
@@ -14,7 +23,7 @@
 }
 
 .bookRow {
-  margin-top: 100px;
+  margin-top: 75px;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -24,9 +33,62 @@
   height: 100%;
   background-color: white;
   min-width: 300px;
+  border: 1px solid rgba(0,0,0,.125);
 }
 
 #bookHeader {
   padding-top: 55px;
   color: #cc3d55;
+}
+
+#bookForm {
+  padding: 15px;
+  h4 {
+    color: rgba(0,0,0,0.4);
+    font-size: 1.2rem;
+    text-align: left;
+    padding-left: 40px;
+  }
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: black !important;
+}
+
+#guests.form-group {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#guestInput {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border: 1px solid black;
+  border-radius: 0;
+  margin-bottom: 30px;
+  width: 50%;
+}
+
+#noInput {
+  display: none;
+}
+
+#guests {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
+}
+
+#backBtn {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  margin-left: 15px;
 }

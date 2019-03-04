@@ -5,13 +5,13 @@ import { HeartIcon, ListUnorderedIcon } from "react-octicons";
 export default class FilterButton extends Component {
   
   filterButton() {
-    return this.props.filterView ? (
-      <Button id="faveBtn" onClick={() => this.props.toggleView("filterOff")}>
+    return this.props.favorites ? (
+      <Button id="faveBtn" onClick={() => this.props.toggleFilter()}>
         <ListUnorderedIcon /> Show All{" "}
       </Button>
       
     ) : (
-      <Button id="faveBtn" onClick={() => this.props.toggleView("filterOn")}>
+      <Button id="faveBtn" onClick={() => this.props.toggleFilter()}>
         <HeartIcon /> Your Favorites{" "}
       </Button>
     );

@@ -24,10 +24,20 @@ export default class MapCard extends Component {
       <div className="cardDetailImg" /> 
   }
 
+  displayFavorite(){
+    return this.props.venue.favorite ?
+      "favorite" : "default"
+  }
+
   displayIcons() {
     return this.props.venue.id ? (
-      <div>
+      <div id="mapIcons">
+        <div
+        id={this.displayFavorite()}
+        onClick={() => this.props.toggleFavorite(this.props.venue.id)}
+        >
         <HeartIcon height={45} width={55} />
+        </div>
         <Button variant="primary">Book</Button>
       </div>
     ) : null;

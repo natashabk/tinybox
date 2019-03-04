@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "../../Styling/Booking.scss";
-import BookingCard from "./BookingCard";
-import DateTime from "./DateTime";
+import BookingVenue from "./BookingVenue";
+import BookingInfoCard from "./BookingInfoCard";
+import Button from "react-bootstrap/Button";
+import { ListUnorderedIcon } from "react-octicons";
 
 export default class Booking extends Component {
   render () {
@@ -19,11 +21,14 @@ export default class Booking extends Component {
 
     return (
       <div className="bookRow" >
-        <div className="col-sm-6">
-        <DateTime />
+       <Button id="backBtn" onClick={() => this.props.toggleView()}>
+        <ListUnorderedIcon /> Back to List{" "}
+      </Button>
+        <div className="col-sm-6" id="bookCol">
+        <BookingInfoCard venue={venue}/>
         </div>
         <div className="col-sm-6" id="cardCol">
-        <BookingCard venue={venue}/> 
+        <BookingVenue venue={venue}/> 
         </div>
       </div>
     )

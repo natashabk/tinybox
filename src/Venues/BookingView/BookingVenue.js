@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 
 
-export default class BookingCard extends Component {
+export default class BookingVenue extends Component {
   
   formatAddress() {
     return `${this.props.venue.address1}, ${this.props.venue.city} ${
