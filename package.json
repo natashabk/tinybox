@@ -10,6 +10,8 @@
     "http-proxy": "^1.18.1",
     "kind-of": "^6.0.3",
     "minimist": "^1.2.3",
+    "node-fetch": "^2.6.1",
+    "node-forge": "^0.10.0",
     "node-sass": "^4.13.1",
     "octicons": "^8.5.0",
     "react": "^16.8.3",
